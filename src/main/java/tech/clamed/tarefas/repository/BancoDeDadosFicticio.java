@@ -46,4 +46,13 @@ public class BancoDeDadosFicticio {
                 .filter(tarefa -> tarefa.getNomeDoResponsavel().equalsIgnoreCase(responsavel))
                 .collect(Collectors.toList());
     }
+
+    //Lista as tarefas filtradas
+    public static List<Tarefa> listarTarefasFiltradas(String owner, Status status, Prioridade priority) {
+        return tarefas.stream()
+                .filter(tarefa -> (owner == null || tarefa.getNomeDoResponsavel().equalsIgnoreCase(owner)) &&
+                        (status == null || tarefa.getStatus() == status) &&
+                        (priority == null || tarefa.getPrioridade() == priority))
+                .collect(Collectors.toList());
+    }
 }
