@@ -51,4 +51,16 @@ public class TarefaController {
         TarefaResponse tarefaResponse = new TarefaResponse(tarefaAtualizada.getIdentificador(), tarefaAtualizada.getDescricao(), tarefaAtualizada.getStatus(), tarefaAtualizada.getPrioridade(), tarefaAtualizada.getNomeDoResponsavel());
         return ResponseEntity.ok(tarefaResponse);
     }
+
+    //DELETA TAREFA
+
+    @DeleteMapping("/tarefas/{identificador}")
+    public ResponseEntity<Void> removerTarefa(@PathVariable Long identificador) {
+        boolean removido = BancoDeDadosFicticio.removerTarefa(identificador);
+        if (removido) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

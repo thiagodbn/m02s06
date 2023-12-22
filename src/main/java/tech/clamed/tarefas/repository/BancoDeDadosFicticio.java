@@ -18,8 +18,8 @@ public class BancoDeDadosFicticio {
     }
 
     // Remover uma tarefa da lista com base no identificador
-    public static void removerTarefa(Long identificador) {
-        tarefas.removeIf(tarefa -> tarefa.getIdentificador().equals(identificador));
+    public static boolean removerTarefa(Long identificador) {
+        return tarefas.removeIf(tarefa -> tarefa.getIdentificador().equals(identificador));
     }
 
     // Listar as tarefas cadastradas
