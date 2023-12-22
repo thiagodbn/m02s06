@@ -38,4 +38,17 @@ public class TarefaController {
 
         return ResponseEntity.ok(responses);
     }
+
+    //MODIFICA TAREFA
+    @PutMapping("/tarefas/{identificador}")
+    public ResponseEntity<TarefaResponse> atualizarTarefa(@PathVariable Long identificador, @RequestBody TarefaRequest tarefaRequest) {
+        Tarefa tarefaAtualizada = BancoDeDadosFicticio.atualizarTarefa(identificador, tarefaRequest);
+
+        if (tarefaAtualizada == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TarefaResponse tarefaResponse = new TarefaResponse(tarefaAtualizada.getIdentificador(), tarefaAtualizada.getDescricao(), tarefaAtualizada.getStatus(), tarefaAtualizada.getPrioridade(), tarefaAtualizada.getNomeDoResponsavel());
+        return ResponseEntity.ok(tarefaResponse);
+    }
 }

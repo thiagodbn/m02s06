@@ -1,4 +1,5 @@
 package tech.clamed.tarefas.repository;
+import tech.clamed.tarefas.dto.TarefaRequest;
 import tech.clamed.tarefas.model.Prioridade;
 import tech.clamed.tarefas.model.Status;
 import tech.clamed.tarefas.model.Tarefa;
@@ -54,5 +55,20 @@ public class BancoDeDadosFicticio {
                         (status == null || tarefa.getStatus() == status) &&
                         (priority == null || tarefa.getPrioridade() == priority))
                 .collect(Collectors.toList());
+    }
+
+
+    //MODIFICA TAREFA
+    public static Tarefa atualizarTarefa(Long identificador, TarefaRequest tarefaRequest) {
+        for (Tarefa tarefa : tarefas) {
+            if (tarefa.getIdentificador().equals(identificador)) {
+                tarefa.setDescricao(tarefaRequest.getDescricao());
+                tarefa.setStatus(tarefaRequest.getStatus());
+                tarefa.setPrioridade(tarefaRequest.getPrioridade());
+                tarefa.setNomeDoResponsavel(tarefaRequest.getNomeDoResponsavel());
+                return tarefa;
+            }
+        }
+        return null; // Tarefa não encontrada
     }
 }
